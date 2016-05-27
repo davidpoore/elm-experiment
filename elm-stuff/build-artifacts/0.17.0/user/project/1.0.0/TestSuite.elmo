@@ -1,5 +1,5 @@
 var _user$project$TestSuite$testNewGame = function () {
-	var initialModel = _elm_lang$core$Basics$fst(_user$project$Main$init);
+	var initialModel = _elm_lang$core$Basics$fst(_user$project$Game$init);
 	var expectedModel = _elm_lang$core$Native_Utils.update(
 		initialModel,
 		{gameScreen: _user$project$TitleScreen$titleScreen, clickCount: 0});
@@ -10,14 +10,14 @@ var _user$project$TestSuite$testNewGame = function () {
 			clickCount: 9
 		});
 	var actualModel = _elm_lang$core$Basics$fst(
-		A2(_user$project$Main$update, _user$project$GameState$GameScreenClicked, updatedModel));
+		A2(_user$project$Game$update, _user$project$GameState$GameScreenClicked, updatedModel));
 	return A2(
 		_elm_community$elm_test$ElmTest$test,
 		'returns to titleScreen',
 		A2(_elm_community$elm_test$ElmTest$assertEqual, expectedModel, actualModel));
 }();
 var _user$project$TestSuite$testGameOver = function () {
-	var initialModel = _elm_lang$core$Basics$fst(_user$project$Main$init);
+	var initialModel = _elm_lang$core$Basics$fst(_user$project$Game$init);
 	var expectedModel = _elm_lang$core$Native_Utils.update(
 		initialModel,
 		{gameScreen: _user$project$GameOverScreen$gameOverScreen, clickCount: 9});
@@ -28,31 +28,31 @@ var _user$project$TestSuite$testGameOver = function () {
 			clickCount: 8
 		});
 	var actualModel = _elm_lang$core$Basics$fst(
-		A2(_user$project$Main$update, _user$project$GameState$GameScreenClicked, updatedModel));
+		A2(_user$project$Game$update, _user$project$GameState$GameScreenClicked, updatedModel));
 	return A2(
 		_elm_community$elm_test$ElmTest$test,
 		'changes to gameOverScreen when clicked 9 times',
 		A2(_elm_community$elm_test$ElmTest$assertEqual, expectedModel, actualModel));
 }();
 var _user$project$TestSuite$testClickCount = function () {
-	var initialModel = _elm_lang$core$Basics$fst(_user$project$Main$init);
+	var initialModel = _elm_lang$core$Basics$fst(_user$project$Game$init);
 	var updatedModel = _elm_lang$core$Basics$fst(
-		A2(_user$project$Main$update, _user$project$GameState$GameScreenClicked, initialModel));
+		A2(_user$project$Game$update, _user$project$GameState$GameScreenClicked, initialModel));
 	var actualModel = _elm_lang$core$Basics$fst(
-		A2(_user$project$Main$update, _user$project$GameState$GameScreenClicked, updatedModel));
+		A2(_user$project$Game$update, _user$project$GameState$GameScreenClicked, updatedModel));
 	return A2(
 		_elm_community$elm_test$ElmTest$test,
 		'playScreen increments clickCount when clicked',
 		A2(_elm_community$elm_test$ElmTest$assertEqual, 2, actualModel.clickCount));
 }();
 var _user$project$TestSuite$testStartClick = function () {
-	var initialModel = _elm_lang$core$Basics$fst(_user$project$Main$init);
+	var initialModel = _elm_lang$core$Basics$fst(_user$project$Game$init);
 	var expectedScreen = _user$project$PlayScreen$playScreen(
 		_elm_lang$core$Native_Utils.update(
 			initialModel,
 			{clickCount: 1}));
 	var actualScreen = _elm_lang$core$Basics$fst(
-		A2(_user$project$Main$update, _user$project$GameState$GameScreenClicked, initialModel)).gameScreen;
+		A2(_user$project$Game$update, _user$project$GameState$GameScreenClicked, initialModel)).gameScreen;
 	return A2(
 		_elm_community$elm_test$ElmTest$test,
 		'changes gameScreen to playScreen when titleScreen is clicked',

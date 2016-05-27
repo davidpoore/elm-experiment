@@ -1,0 +1,70 @@
+var _user$project$Game$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('game')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$header,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('game__title')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('NINE TIMES')
+					])),
+				model.gameScreen
+			]));
+};
+var _user$project$Game$init = {
+	ctor: '_Tuple2',
+	_0: {gameScreen: _user$project$TitleScreen$titleScreen, clickCount: 0},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Game$update = F2(
+	function (msg, model) {
+		var updatedModel = _elm_lang$core$Native_Utils.update(
+			model,
+			{clickCount: model.clickCount + 1});
+		var _p0 = msg;
+		return _elm_lang$core$Native_Utils.eq(updatedModel.clickCount, 1) ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				updatedModel,
+				{
+					gameScreen: _user$project$PlayScreen$playScreen(updatedModel)
+				}),
+			_1: _elm_lang$core$Platform_Cmd$none
+		} : (_elm_lang$core$Native_Utils.eq(updatedModel.clickCount, 9) ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				updatedModel,
+				{gameScreen: _user$project$GameOverScreen$gameOverScreen}),
+			_1: _elm_lang$core$Platform_Cmd$none
+		} : ((_elm_lang$core$Native_Utils.cmp(updatedModel.clickCount, 9) > 0) ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				updatedModel,
+				{gameScreen: _user$project$TitleScreen$titleScreen, clickCount: 0}),
+			_1: _elm_lang$core$Platform_Cmd$none
+		} : {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				updatedModel,
+				{
+					gameScreen: _user$project$PlayScreen$playScreen(updatedModel)
+				}),
+			_1: _elm_lang$core$Platform_Cmd$none
+		}));
+	});
+var _user$project$Game$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Game$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Game$init, update: _user$project$Game$update, subscriptions: _user$project$Game$subscriptions, view: _user$project$Game$view})
+};

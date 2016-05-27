@@ -2,7 +2,7 @@ var _user$project$GameOverScreen$gameOverScreen = A2(
 	_elm_lang$html$Html$div,
 	_elm_lang$core$Native_List.fromArray(
 		[
-			_elm_lang$html$Html_Events$onClick(_user$project$GameState$GameScreenClicked)
+			_elm_lang$html$Html_Attributes$class('gameScreen')
 		]),
 	_elm_lang$core$Native_List.fromArray(
 		[
@@ -10,9 +10,44 @@ var _user$project$GameOverScreen$gameOverScreen = A2(
 			_elm_lang$html$Html$img,
 			_elm_lang$core$Native_List.fromArray(
 				[
+					_elm_lang$html$Html_Attributes$class('gameScreen__image'),
 					_elm_lang$html$Html_Attributes$src('images/game_over.png')
 				]),
 			_elm_lang$core$Native_List.fromArray(
 				[])),
-			_elm_lang$html$Html$text('Have a trophy.')
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('gameScreen__playScreenClicks')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(9),
+						'!'))
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('gameScreen__victoryMessage')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Have a trophy.')
+				])),
+			A2(
+			_elm_lang$html$Html$button,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('gameScreen__button'),
+					_elm_lang$html$Html_Events$onClick(_user$project$GameState$GameScreenClicked)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Again?')
+				]))
 		]));

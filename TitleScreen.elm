@@ -8,7 +8,18 @@ import GameState exposing (..)
 
 titleScreen : Html Msg
 titleScreen =
-    div [ onClick GameScreenClicked ]
-        [ img [ src "images/title_screen.png" ] []
-        , text "I can do it. I will do it nine times."
+    div [ class "gameScreen" ]
+        [ img
+            [ class "gameScreen__image"
+            , src "images/title_screen.png"
+            ]
+            []
+        , div []
+            [ button
+                [ class "gameScreen__button"
+                , onClick GameScreenClicked
+                ]
+                [ text "I can do it. I will do it nine times." ]
+            , div [] [ text "(click the button to start)" ]
+            ]
         ]

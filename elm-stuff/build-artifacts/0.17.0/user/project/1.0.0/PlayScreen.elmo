@@ -1,9 +1,28 @@
+var _user$project$PlayScreen$appendSpaceAndStringify = function (num) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(num),
+		' ');
+};
+var _user$project$PlayScreen$countEmUp = function (clicks) {
+	return A3(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (x, y) {
+				return A2(_elm_lang$core$Basics_ops['++'], x, y);
+			}),
+		'',
+		A2(
+			_elm_lang$core$List$map,
+			_user$project$PlayScreen$appendSpaceAndStringify,
+			_elm_lang$core$Native_List.range(1, clicks)));
+};
 var _user$project$PlayScreen$playScreen = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Events$onClick(_user$project$GameState$GameScreenClicked)
+				_elm_lang$html$Html_Attributes$class('gameScreen')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -11,11 +30,32 @@ var _user$project$PlayScreen$playScreen = function (model) {
 				_elm_lang$html$Html$img,
 				_elm_lang$core$Native_List.fromArray(
 					[
+						_elm_lang$html$Html_Attributes$class('gameScreen__image'),
 						_elm_lang$html$Html_Attributes$src('images/game_started.png')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[])),
-				_elm_lang$html$Html$text(
-				_elm_lang$core$Basics$toString(model.clickCount))
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('gameScreen__button'),
+						_elm_lang$html$Html_Events$onClick(_user$project$GameState$GameScreenClicked)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('CLICK HERE!!!')
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('gameScreen__playScreenClicks')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_user$project$PlayScreen$countEmUp(model.clickCount))
+					]))
 			]));
 };

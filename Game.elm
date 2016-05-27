@@ -1,4 +1,4 @@
-module Main exposing (..)
+module Game exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -58,4 +58,7 @@ init =
 
 view : Model -> Html Msg
 view model =
-    model.gameScreen
+    div [ class "game" ]
+        [ header [ class "game__title" ] [ text "NINE TIMES" ]
+        , model.gameScreen
+        ]

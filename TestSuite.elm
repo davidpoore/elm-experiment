@@ -1,7 +1,7 @@
 module TestSuite exposing (..)
 
 import ElmTest exposing (..)
-import Main exposing (..)
+import Game exposing (..)
 import TitleScreen exposing (..)
 import PlayScreen exposing (..)
 import GameOverScreen exposing (..)
@@ -17,13 +17,13 @@ testStartClick : Test
 testStartClick =
     let
         initialModel =
-            fst Main.init
+            fst Game.init
 
         expectedScreen =
             playScreen { initialModel | clickCount = 1 }
 
         actualScreen =
-            (fst (Main.update GameScreenClicked initialModel)).gameScreen
+            (fst (Game.update GameScreenClicked initialModel)).gameScreen
     in
         test "changes gameScreen to playScreen when titleScreen is clicked"
             (assertEqual expectedScreen actualScreen)
@@ -33,13 +33,13 @@ testClickCount : Test
 testClickCount =
     let
         initialModel =
-            fst Main.init
+            fst Game.init
 
         updatedModel =
-            fst (Main.update GameScreenClicked initialModel)
+            fst (Game.update GameScreenClicked initialModel)
 
         actualModel =
-            fst (Main.update GameScreenClicked updatedModel)
+            fst (Game.update GameScreenClicked updatedModel)
     in
         test "playScreen increments clickCount when clicked"
             (assertEqual 2 actualModel.clickCount)
@@ -49,7 +49,7 @@ testGameOver : Test
 testGameOver =
     let
         initialModel =
-            fst Main.init
+            fst Game.init
 
         expectedModel =
             { initialModel | gameScreen = gameOverScreen, clickCount = 9 }
@@ -58,7 +58,7 @@ testGameOver =
             { initialModel | gameScreen = playScreen initialModel, clickCount = 8 }
 
         actualModel =
-            (fst (Main.update GameScreenClicked updatedModel))
+            (fst (Game.update GameScreenClicked updatedModel))
     in
         test "changes to gameOverScreen when clicked 9 times"
             (assertEqual expectedModel actualModel)
@@ -68,7 +68,7 @@ testNewGame : Test
 testNewGame =
     let
         initialModel =
-            fst Main.init
+            fst Game.init
 
         expectedModel =
             { initialModel | gameScreen = titleScreen, clickCount = 0 }
@@ -77,7 +77,7 @@ testNewGame =
             { initialModel | gameScreen = playScreen initialModel, clickCount = 9 }
 
         actualModel =
-            (fst (Main.update GameScreenClicked updatedModel))
+            (fst (Game.update GameScreenClicked updatedModel))
     in
         test "returns to titleScreen"
             (assertEqual expectedModel actualModel)

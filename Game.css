@@ -1,0 +1,52 @@
+body {
+    background: black;
+    color: white;
+    font-size: 16px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    cursor: default;
+    text-align: center;
+}
+
+.game__title {
+    font-size: 40px;
+    padding-top: 10px;
+    display: block;
+}
+
+.gameScreen {
+    width: 460px;
+    height: 350px;
+    margin: 50px auto;
+    position: relative;
+}
+
+.gameScreen__image {
+    width: 460px;
+    height: 350px;
+    margin-bottom: 30px;
+}
+
+.gameScreen__button {
+    font-size: 16px;
+    border: none;
+    background: white;
+    color: black;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin-bottom: 10px;
+}
+
+.gameScreen__playScreenClicks {
+    position: absolute;
+    top: 320px;
+    left: 10px;
+    font-size: 24px;
+}
+
+.gameScreen__victoryMessage {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
