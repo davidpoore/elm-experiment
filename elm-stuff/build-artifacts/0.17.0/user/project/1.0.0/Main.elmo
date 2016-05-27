@@ -1,0 +1,71 @@
+var _user$project$Main$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {gameState: a, clickCount: b};
+	});
+var _user$project$Main$GameOver = {ctor: 'GameOver'};
+var _user$project$Main$GameStarted = {ctor: 'GameStarted'};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var updatedModel = _elm_lang$core$Native_Utils.update(
+			model,
+			{clickCount: model.clickCount + 1});
+		var initialModel = model;
+		var _p0 = msg;
+		if (_p0.ctor === 'NewGameClicked') {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					initialModel,
+					{gameState: _user$project$Main$GameStarted}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return (_elm_lang$core$Native_Utils.cmp(updatedModel.clickCount, 9) > -1) ? {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					updatedModel,
+					{gameState: _user$project$Main$GameOver}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			} : {ctor: '_Tuple2', _0: updatedModel, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Main$TitleScreen = {ctor: 'TitleScreen'};
+var _user$project$Main$init = {
+	ctor: '_Tuple2',
+	_0: {gameState: _user$project$Main$TitleScreen, clickCount: 0},
+	_1: _elm_lang$core$Platform_Cmd$none
+};
+var _user$project$Main$StrongBadClicked = {ctor: 'StrongBadClicked'};
+var _user$project$Main$NewGameClicked = {ctor: 'NewGameClicked'};
+var _user$project$Main$gameClick = function (model) {
+	var _p1 = model.gameState;
+	switch (_p1.ctor) {
+		case 'TitleScreen':
+			return _user$project$Main$NewGameClicked;
+		case 'GameOver':
+			return _user$project$Main$NewGameClicked;
+		default:
+			return _user$project$Main$StrongBadClicked;
+	}
+};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Events$onClick(
+				_user$project$Main$gameClick(model))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(
+				_elm_lang$core$Basics$toString(model.gameState))
+			]));
+};
+var _user$project$Main$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$Main$init, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions, view: _user$project$Main$view})
+};
