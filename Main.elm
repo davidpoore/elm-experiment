@@ -4,23 +4,14 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.App as Html
 import Html.Events exposing (..)
-
-
-type GameState
-    = TitleScreen
-    | GameStarted
-    | GameOver
+import TitleScreen exposing (..)
+import PlayScreen exposing (..)
+import GameOverScreen exposing (..)
+import GameState exposing (..)
 
 
 type alias Model =
-    { gameState : GameState
-    , clickCount : Int
-    }
-
-
-type Msg
-    = NewGameClicked
-    | StrongBadClicked
+    GameState
 
 
 main : Program Never
@@ -41,42 +32,30 @@ subscriptions model =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     let
-        initialModel =
-            model
-
         updatedModel =
             { model | clickCount = model.clickCount + 1 }
     in
         case msg of
-            NewGameClicked ->
-                ( { initialModel | gameState = GameStarted }, Cmd.none )
-
-            StrongBadClicked ->
-                if updatedModel.clickCount >= 9 then
-                    ( { updatedModel | gameState = GameOver }, Cmd.none )
+            GameScreenClicked ->
+                if updatedModel.clickCount == 1 then
+                    ( { updatedModel | gameScreen = playScreen updatedModel }, Cmd.none )
+                else if updatedModel.clickCount == 9 then
+                    ( { updatedModel | gameScreen = gameOverScreen }, Cmd.none )
+                else if updatedModel.clickCount > 9 then
+                    ( { updatedModel | gameScreen = titleScreen, clickCount = 0 }, Cmd.none )
                 else
-                    ( updatedModel, Cmd.none )
+                    ( { updatedModel | gameScreen = playScreen updatedModel }, Cmd.none )
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { gameState = TitleScreen, clickCount = 0 }, Cmd.none )
+    ( { gameScreen = titleScreen
+      , clickCount = 0
+      }
+    , Cmd.none
+    )
 
 
 view : Model -> Html Msg
 view model =
-    div [ onClick (gameClick model) ]
-        [ text (toString model.gameState) ]
-
-
-gameClick : Model -> Msg
-gameClick model =
-    case model.gameState of
-        TitleScreen ->
-            NewGameClicked
-
-        GameOver ->
-            NewGameClicked
-
-        GameStarted ->
-            StrongBadClicked
+    model.gameScreen

@@ -2,27 +2,15 @@ module TestSuite exposing (..)
 
 import ElmTest exposing (..)
 import Main exposing (..)
+import TitleScreen exposing (..)
+import PlayScreen exposing (..)
+import GameOverScreen exposing (..)
+import GameState exposing (..)
 
 
 allTests : Test
 allTests =
-    suite "tests" [ testClickCount, testStartClick, testGameOver ]
-
-
-testClickCount : Test
-testClickCount =
-    let
-        initialModel =
-            fst Main.init
-
-        expectedModel =
-            { initialModel | clickCount = initialModel.clickCount + 1 }
-
-        updatedModel =
-            fst (Main.update StrongBadClicked initialModel)
-    in
-        test "increments clickCount when a StrongBadClicked message is received"
-            (assertEqual expectedModel updatedModel)
+    suite "tests" [ testClickCount, testStartClick, testGameOver, testNewGame ]
 
 
 testStartClick : Test
@@ -31,14 +19,30 @@ testStartClick =
         initialModel =
             fst Main.init
 
-        expectedModel =
-            { initialModel | gameState = GameStarted }
+        expectedScreen =
+            playScreen { initialModel | clickCount = 1 }
+
+        actualScreen =
+            (fst (Main.update GameScreenClicked initialModel)).gameScreen
+    in
+        test "changes gameScreen to playScreen when titleScreen is clicked"
+            (assertEqual expectedScreen actualScreen)
+
+
+testClickCount : Test
+testClickCount =
+    let
+        initialModel =
+            fst Main.init
 
         updatedModel =
-            fst (Main.update NewGameClicked initialModel)
+            fst (Main.update GameScreenClicked initialModel)
+
+        actualModel =
+            fst (Main.update GameScreenClicked updatedModel)
     in
-        test "changes gameState to GameStarted when NewGameclicked message is received"
-            (assertEqual expectedModel updatedModel)
+        test "playScreen increments clickCount when clicked"
+            (assertEqual 2 actualModel.clickCount)
 
 
 testGameOver : Test
@@ -47,17 +51,36 @@ testGameOver =
         initialModel =
             fst Main.init
 
-        expectedGameState =
-            { initialModel | gameState = GameOver }.gameState
+        expectedModel =
+            { initialModel | gameScreen = gameOverScreen, clickCount = 9 }
 
         updatedModel =
-            { initialModel | gameState = GameStarted, clickCount = 8 }
+            { initialModel | gameScreen = playScreen initialModel, clickCount = 8 }
 
-        updatedGameState =
-            (fst (Main.update StrongBadClicked updatedModel)).gameState
+        actualModel =
+            (fst (Main.update GameScreenClicked updatedModel))
     in
-        test "changes gameState to GameOver when StrongBadClicked and click count is 9 or higher"
-            (assertEqual expectedGameState updatedGameState)
+        test "changes to gameOverScreen when clicked 9 times"
+            (assertEqual expectedModel actualModel)
+
+
+testNewGame : Test
+testNewGame =
+    let
+        initialModel =
+            fst Main.init
+
+        expectedModel =
+            { initialModel | gameScreen = titleScreen, clickCount = 0 }
+
+        updatedModel =
+            { initialModel | gameScreen = playScreen initialModel, clickCount = 9 }
+
+        actualModel =
+            (fst (Main.update GameScreenClicked updatedModel))
+    in
+        test "returns to titleScreen"
+            (assertEqual expectedModel actualModel)
 
 
 main =

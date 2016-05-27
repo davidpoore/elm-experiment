@@ -1,0 +1,5 @@
+var _user$project$GameState$GameState = F2(
+	function (a, b) {
+		return {gameScreen: a, clickCount: b};
+	});
+var _user$project$GameState$GameScreenClicked = {ctor: 'GameScreenClicked'};
