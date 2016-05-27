@@ -31,14 +31,6 @@ var _user$project$TitleScreen$titleScreen = A2(
 					_elm_lang$core$Native_List.fromArray(
 						[
 							_elm_lang$html$Html$text('I can do it. I will do it nine times.')
-						])),
-					A2(
-					_elm_lang$html$Html$div,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text('(click the button to start)')
 						]))
 				]))
 		]));

@@ -20,6 +20,5 @@ titleScreen =
                 , onClick GameScreenClicked
                 ]
                 [ text "I can do it. I will do it nine times." ]
-            , div [] [ text "(click the button to start)" ]
             ]
         ]
