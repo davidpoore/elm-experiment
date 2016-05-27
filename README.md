@@ -1,4 +1,6 @@
-# elm-experiment
-experimenting with ELM stuff
+# nine-times
+you can do it
 
-trying a basic "game" of some sort
+you will do it nine times
+
+http://www.homestarrunner.com/sbemail72.html
